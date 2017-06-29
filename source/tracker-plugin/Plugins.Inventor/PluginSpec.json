@@ -1,0 +1,10 @@
+﻿{
+    "Id": "ManicTime.DocumentTracker.Inventor",
+    "Version": "3.8.1.0",
+    "Type": "DocumentTracker",
+    "AssemblyName": "Plugins.Inventor.dll",
+    "Name": "Document timeline: Inventor",
+    "Description": "Get file name from window title",
+    "MinHostVersion":  "3.7",
+    "MaxHostVersion": "4.0"
+}
