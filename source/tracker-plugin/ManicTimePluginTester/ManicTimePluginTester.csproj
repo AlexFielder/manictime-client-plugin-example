@@ -59,8 +59,8 @@
     <Reference Include="ManicTime.Client.Tracker.Win">
       <HintPath>..\..\..\libs\ManicTime.Client.Tracker.Win.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -123,6 +123,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Plugins.Inventor\Plugins.Inventor.csproj">
+      <Project>{1acad381-5915-4f13-b9e9-52c184e22c55}</Project>
+      <Name>Plugins.Inventor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plugins.Notepad\Plugins.Notepad.csproj">
       <Project>{2b5ceae9-313f-440c-9213-c67cedc898b6}</Project>
       <Name>Plugins.Notepad</Name>
