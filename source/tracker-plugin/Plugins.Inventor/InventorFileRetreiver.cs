@@ -1,5 +1,7 @@
 ﻿using Finkit.ManicTime.Shared.DocumentTracking;
+using Inventor;
 using ManicTime.Client.Tracker.EventTracking.Publishers.ApplicationTracking;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace Plugins.Inventor
@@ -43,20 +45,48 @@ namespace Plugins.Inventor
 
         private string GetFilename(ApplicationInfo application)
         {
-            // notepad title looks like  'filename - Notepad'. We are only after the first part, 'filename'
-            var i = application.WindowTitle.LastIndexOfAny(new[] { '-', '–' });
-            if (i > 0)
+            //New method:
+            Application inventorApp = null;
+            Document activeDocument = null;
+
+            inventorApp = Marshal.GetActiveObject("Inventor.Application") as Application;
+            activeDocument = inventorApp.ActiveDocument;
+
+            if (activeDocument.FullFileName != "") //document has been saved.
             {
-                Regex fileregex = new Regex(@"(\[.*?\])");
-                string f = string.Empty;
-                f = fileregex.Match(application.WindowTitle).Captures[0].ToString();
-                f = f.Replace("[", "");
-                f = f.Replace("]", "");
-                return f;
-                //return application.WindowTitle.Substring(0, i).Trim();
-                //return fileregex.IsMatch(application.WindowTitle)? application.WindowTitle : application.WindowTitle;
-                //return application.WindowTitle.Substring(i,application.WindowTitle.Length - i).Trim();
+                string fileName = string.Empty;
+                fileName = System.IO.Path.GetFileName(activeDocument.FullFileName);
+                return fileName;
             }
+            else
+            {
+                var i = application.WindowTitle.LastIndexOfAny(new[] { '-', '–' });
+                if (i > 0)
+                {
+                    Regex fileregex = new Regex(@"(\[.*?\])");
+                    string f = string.Empty;
+                    f = fileregex.Match(application.WindowTitle).Captures[0].ToString();
+                    f = f.Replace("[", "");
+                    f = f.Replace("]", "");
+                    return f;
+                }
+            }
+
+            // Original method:
+            //// notepad title looks like  'filename - Notepad'. We are only after the first part, 'filename'
+            //var i = application.WindowTitle.LastIndexOfAny(new[] { '-', '–' });
+            //if (i > 0)
+            //{
+            //    Regex fileregex = new Regex(@"(\[.*?\])");
+            //    string f = string.Empty;
+            //    f = fileregex.Match(application.WindowTitle).Captures[0].ToString();
+            //    f = f.Replace("[", "");
+            //    f = f.Replace("]", "");
+            //    return f;
+            //    //return application.WindowTitle.Substring(0, i).Trim();
+            //    //return fileregex.IsMatch(application.WindowTitle)? application.WindowTitle : application.WindowTitle;
+            //    //return application.WindowTitle.Substring(i,application.WindowTitle.Length - i).Trim();
+            //}
 
             return null;
         }
