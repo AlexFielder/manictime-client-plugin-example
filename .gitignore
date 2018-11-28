@@ -31,3 +31,4 @@ _ReSharper*/
 
 # NuGet
 packages/
+/source/tracker-plugin/.vs/ManicTimePluginTester/v15/Server/sqlite3
